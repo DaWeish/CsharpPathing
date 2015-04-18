@@ -5,12 +5,18 @@ namespace GraphPathing
 {
 	public class GridGraph
 	{
-		protected int gridWidth, gridHeight;
+		protected int gridWidth;
+		protected int gridHeight;
 
 		public GridGraph(int width, int height)
 		{
 			gridWidth = width;
 			gridHeight = height;
+		}
+
+		public int getGridWidth() {return gridWidth;}
+		public int getGridHeight() {
+			return gridHeight;
 		}
 
 		public bool validLocation (Location loc)
@@ -29,12 +35,12 @@ namespace GraphPathing
 			return false;
 		}
 
-		public ArrayList getNeighbors (int x, int y)
+		public virtual ArrayList getNeighbors (int x, int y)
 		{
 			return getNeighbors (new Location (x, y));
 		}
 
-		public ArrayList getNeighbors (Location loc)
+		public virtual ArrayList getNeighbors (Location loc)
 		{
 			ArrayList neighbors = new ArrayList();
 

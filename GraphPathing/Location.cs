@@ -1,8 +1,9 @@
 ﻿using System;
+using Priority_Queue;
 
 namespace GraphPathing
 {
-	public class Location
+	public class Location : PriorityQueueNode
 	{
 		public int X { get; set; }
 		public int Y { get; set; }

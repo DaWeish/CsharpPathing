@@ -7,14 +7,35 @@ namespace GraphPathing
 	{
 		public static void Main (string[] args)
 		{
-			var myGraph = new BFSGridGraph(10, 10);
+			var myBoard = new GameBoardModel (5, 5);
 
-			myGraph.calculatePath (new Location (1, 2), new Location (7, 8));
+			var pathAlg = new AstarSearch (myBoard);
 
-			Console.WriteLine ("Printing path from 1,2 to 7, 8");
-			foreach (Location loc in myGraph.getCalculatedPath (new Location(1, 2), new Location (7, 8))) {
-				Console.WriteLine (loc.X + ", " + loc.Y);
+			Location wall1 = new Location (0, 1);
+			Location wall2 = new Location (1, 0);
+
+			Stack myPath = new Stack ();
+			BitBoard myWalls = new BitBoard (5, 5);
+			myWalls.setBits (true, wall1, wall2);
+
+			Location a = new Location (0, 0);
+			Location b = new Location (4, 4);
+
+			Location c = new Location (3, 2);
+			myBoard.setLocationWeight (c, 4);
+			myBoard.setImpassables (myWalls);
+
+			if (pathAlg.calculatePath (a, b, myPath)) {
+
+				while (myPath.Count != 0) {
+					Location temp = (Location)myPath.Pop ();
+					Console.WriteLine (temp.X + ", " + temp.Y);
+				}
+			} else {
+				Console.WriteLine ("No path exists!");
 			}
+
+			return;
 		}
 	}
 }
